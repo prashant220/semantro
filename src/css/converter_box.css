@@ -1,0 +1,88 @@
+.converted_text {
+  text-align: center;
+  font-weight: bold;
+  font-size: 19px;
+  line-height: 28px;
+  color: #cf481b;
+}
+
+.text-border {
+  /* border-radius: 10px;
+  padding: 30px; */
+  margin: 20px;
+}
+
+
+.text {
+  text-align: center;
+}
+
+.copy {
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  padding: 4px 15px;
+  height: 32px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.65);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+}
+
+.ant-upload-list-item-info {
+  width: max-content !important;
+}
+.small_box {
+  width: 95%;
+  height: 271px;
+  margin-left: 3%;
+  border: 1px solid #212121;
+  box-sizing: border-box;
+  margin-top: 1%;
+}
+/* .ant-form {
+    display: flex!important;
+} */
+
+.box_text {
+  text-align: center;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 28px;
+  margin-left: 5%;
+
+  /* identical to box height */
+  margin-top: 10px;
+  color: #000000;
+  font-style: normal;
+}
+.box_button {
+  width: 204px;
+  height: 36px;
+  margin-top: -45px;
+  background: #e5e5e5;
+  margin-right: 52px;
+
+  float: right;
+}
+textarea {
+  width: 96%;
+  position: absolute;
+  left: 2%;
+
+  margin-left: 2%;
+  height: 280px;
+}
+/* .ant-card-body {
+  padding: 0px !important;
+} */
+/* .anticon anticon-check-circle{
+    margin-bottom: 20px!important;
+  
+  }
+   */
+   .ant-message {
+    position: absolute;
+    top: 87%;
+    left: 88%;
+   
+  
+  }

@@ -1,0 +1,38 @@
+
+.speech-to-text-container {
+    margin: 1em;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    
+    min-height: 90vh;
+
+   
+
+
+}
+
+.speech-file-upload-container {
+    padding: 20px;
+}
+
+.speech-file-text-result-container {
+    padding: 20px;
+    
+}
+
+.margin-top-10{
+    margin-top: 10px;
+}
+.margin-top-20{
+    margin-top: 20px;
+}
+.card-style-1{
+    border-radius: 20px;
+    box-shadow: -1px 1px 8px -1px rgba(41, 33, 4, 0.432);
+}
+
+.textarea-for-text{
+    border-radius: 20px;
+    box-shadow: -1px 1px 8px -1px rgba(110, 153, 182, 0.774);
+    padding: 1.2em;
+}

@@ -1,0 +1,150 @@
+.ant-upload.ant-upload-drag {
+ margin-top:10px;
+ width: 33%!important;
+ background-color: #23226C!important;
+ border:none!important
+}
+
+
+ 
+
+
+   @media screen and (max-width: 600px) {
+     .switch-button{
+       margin-left: 0px;
+     }
+  
+ .audio-box{
+   margin-top: 10%;
+ }
+.audio{
+  flex-direction: column;
+ 
+}
+     .convert_button{
+       margin-left: 26%;
+     }
+     .site-card-border-less-wrapper {
+       margin-left: 20%;
+     }
+  } 
+  
+
+/*   
+  @media screen and (max-width: 800px) {
+  
+    .audio-box{
+      margin-top: 10%;
+    }
+   
+        
+     }
+      */
+  
+.upload_box{
+  width: 201px;
+height: 176.46px;
+background-color: #23226C;
+margin-left: 121%;
+margin-top:25%
+;
+}
+  /* .audio{
+   
+    margin-top:4%;
+    margin-right: 23%
+
+  } */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+.audio_para{
+  color: white;
+ text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* .convert_div{
+  float: right;
+margin-right: 26%;
+margin-top: 10%;
+} */
+
+/* .audio{
+  display: flex;
+
+ 
+} */
+  
+  /* .audio{
+    width: 30%;
+    height: 175px;
+    background-color: #23226C;
+    ;
+    position: absolute;
+    left: 225px;
+    top: 32px;
+  } */
+  .upload-icon{
+    color: white;
+  
+    font-size: 55px;
+   
+    position: absolute;
+    left: 36%;
+    top: 20%;
+}
+  
+  .convert_button{
+    width: 153.08px;
+height: 49.92px;
+font-weight: normal;
+font-size: 12px;
+line-height: 18px;
+background: #23226C;
+border: white;
+color: #FFFFFF;
+ margin-left: 100%;
+margin-top: 9%;  
+display: block;
+
+
+
+  }
+  .audioRecorder{
+  width: 100%;
+  height: 21px;
+  }
+  .play{
+    width: 200px;
+  }
+  
+
+
+
+
+  #convertvideo_button{
+    width: 153.08px;
+height: 49.92px;
+font-weight: normal;
+font-size: 12px;
+line-height: 18px;
+background: #23226C;
+border: white;
+color: #FFFFFF;
+/* margin-left: 27%;
+margin-top: 9%; */
+display: block;
+margin-left: 132%;
+margin-top: -42%;
+
+
+
+  }
+  /* .audio-react-recorder__canvas{
+    position: absolute;
+  } */
+
+  .ant-upload.ant-upload-drag p.ant-upload-drag-icon .anticon {
+   
+   
+    margin-left: -87% !important;
+}
