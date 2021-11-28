@@ -13,6 +13,7 @@ export default function Body() {
             margin: "auto",
             display: "block",
             textShadow: " 2px 2px #rgb(70, 65, 65) ",
+            marginLeft:'48%'
           
          
           }}
@@ -24,9 +25,10 @@ export default function Body() {
         <p
           style={{
             fontSize: "20px",
-            margin: "auto",
+            margin: "5vh auto auto 48%",
             display: "block",
-            marginTop: "5vh",
+            
+           
         
          
           }}

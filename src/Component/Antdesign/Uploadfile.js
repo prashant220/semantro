@@ -158,7 +158,7 @@ export default class Uploadfile extends Component {
               )}
 
           
-              {
+              {/* {
                 this.state.speechToTextSuccess?(
                   <Row>
                   <Col span={24 } className="speech-file-text-result-container">
@@ -177,10 +177,35 @@ export default class Uploadfile extends Component {
                    </Row>
                 ):null
               }
-           
+            */}
+          
+         
+              
             </Form>
             
           </Card>
+          {
+            this.state.speechToTextSuccess?
+
+            <Row>
+            <Col span={24 } className="speech-file-text-result-container">
+          
+                    <Alert
+                      message="Conversion Success"
+                      type="success"
+                   
+                      showIcon/>
+                 
+                
+                  
+                 
+             </Col>
+            
+             </Row>:null
+    
+
+          }
+   
         </div>
 
         <Converterbox value={this.state.speechText} />

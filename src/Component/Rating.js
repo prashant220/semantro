@@ -52,14 +52,14 @@ export default function Rating(props) {
    <Col xl={0} md={0} xs={0}></Col>
    <Col xl={24} md={24} xs={24}>
    <div className="rating-box">
-      <p style={{fontSize:'16px',color:'black',color:'rgb(207, 72, 27)',margin:'auto'}}>Rate this transcribe</p>
+      <p style={{fontSize:'16px',color:'black',color:'rgb(207, 72, 27)',margin:'auto',marginRight:'45px'}}>Rate this transcribe</p>
        
        
        
        <div>
    <Row>
      <Col xl={10} md={10} xs={6}></Col>
-     <Col xl={14} md={14} xs={14}> 
+     <Col  md={14} xs={14}> 
      <ReactStars
     count={5}
     onChange={ratingChanged}

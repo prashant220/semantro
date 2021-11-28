@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./css/uploadfile.css";
 import { Upload, message } from "antd";
@@ -13,8 +12,7 @@ import { Modal, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { Prompt } from "react-router-dom";
-const { Dragger } = Upload;
-const { TextArea } = Input;
+
 function Recordlive(props) {
   const [speechToTextLoading, setSpeechToTextLoading] = useState(false);
   const [recordedAudioFile, setrecordedAudioFile] = useState(null);
@@ -31,13 +29,16 @@ function Recordlive(props) {
       onStop: (blobUrl, blob) => setrecordedAudioFile(blob),
       startRecording: () => setOpenMic(true),
     });
-
+console.log(startRecording)
   console.log(openMic);
   console.log(mediaBlobUrl);
   console.log(blob);
 
   const file = new File([blob], "filename.mp3");
   console.log(file);
+
+
+
 
   const handleSpeechToTextRequest = (audioFile) => {
     let endpoint = "http://3.138.164.184:7000/speech/";
@@ -86,34 +87,41 @@ function Recordlive(props) {
       },
     });
   }
+function Display(){
+  if(status=="idle"){
+   return ("off")
+  }
+  else{
+    return ("on")
+  }
+}
+ console.log(status)
   
-
-
   function changeFormat() {
-    {
+   
+     
       if (openMic == false && play == false) {
         return (
-          <div class="row" >
+          
+          <div class="row">
             <div className="row">
               <h1 className="record_audio">Record Audio</h1>
             </div>
             <div className="row">
+           
               <p className="record_para">is your microphone ready?</p>
             </div>
             <div className="row">
               <Col></Col>
               <Col>
-              
-        
                 <Button
                   onClick={() => {
                     startRecording();
                     setOpenMic(true);
                     setRecord("Recording...");
                     setspeechToTextSucess(false);
-                setIsChanged(true)
+                    setIsChanged(true);
                   }}
-          
                   style={{
                     padding: "26px 40px",
                     lineHeight: "0px",
@@ -132,12 +140,16 @@ function Recordlive(props) {
             </div>
           </div>
         );
-      } else {
+      }
+      {
+        Display()
+      }
+       {
         if (openMic == true && play == false) {
           return (
             <div class="row">
               <div className="row">
-                <p className="stop_text">Speak now...</p>
+                <p className="stop_text">Speak now...{status}</p>
               </div>
 
               <div class="row mic">
@@ -151,7 +163,7 @@ function Recordlive(props) {
                 </div>
               </div>
 
-              <Row gutter={[16, 24]} style={{paddingBottom:'10px'}}>
+              <Row gutter={[16, 24]} style={{ paddingBottom: "10px" }}>
                 <Col xl={6} md={0} xs={0}></Col>
 
                 <Col xl={6} md={12} xs={24}>
@@ -200,7 +212,10 @@ function Recordlive(props) {
               </Row>
             </div>
           );
-        } else {
+        } 
+        
+ 
+         
           if (openMic == true && play == true) {
             return (
               <div className="row">
@@ -211,17 +226,11 @@ function Recordlive(props) {
                 <Row style={{ marginBottom: "10vh", marginTop: "5vh" }}>
                   <Col xl={8} md={8} xs={6}></Col>
                   <Col>
-                  <audio
-                    src={mediaBlobUrl}
-                    controls 
-                    loop
-                 
-                  />
+                    <audio src={mediaBlobUrl} controls loop type={true} />
                   </Col>
                   <Col></Col>
-                 
                 </Row>
-                <Row gutter={[16, 24]} style={{marginBottom:'10px'}}>
+                <Row gutter={[16, 24]} style={{ marginBottom: "10px" }}>
                   <Col xl={6} md={0} xs={0}></Col>
                   <Col xl={6} md={12} xs={24}>
                     <Button
@@ -246,10 +255,9 @@ function Recordlive(props) {
                       type="primary"
                       size="large"
                       htmlType="submit"
-                      onClick={()=>{
-                        handleRecordedAudioUpload()
-                      setIsChanged(false)
-                      
+                      onClick={() => {
+                        handleRecordedAudioUpload();
+                        setIsChanged(false);
                       }}
                       loading={speechToTextLoading}
                       style={{
@@ -268,45 +276,39 @@ function Recordlive(props) {
               </div>
             );
           }
+        
+        
+        
+      
         }
-      }
-    }
+
   }
- const[isChanged,setIsChanged]=useState(false)
- console.log(isChanged)
+  const [isChanged, setIsChanged] = useState(false);
+  console.log(isChanged);
 
   return (
-    
     <div>
       <Prompt
         when={isChanged}
-        message={location =>
+        message={(location) =>
           `Are you sure you want to go to ${location.pathname}`
         }
       />
-      <div className="site-card-border-less-wrapper" >
+      <div className="site-card-border-less-wrapper">
         <Card style={{ width: "97%" }}>{changeFormat()}</Card>
-<Row>
-        <Col span={24 } className="speech-file-text-result-container">
-        { speechToTextSucess ? (
-                <Alert
-                  message="Conversion Success"
-                  type="success"
-                  style={{  marginTop:'3%',marginLeft:'40%'}}
-                  showIcon/>
-             
-            
-              ) : null} 
-             
-         </Col>
-        
-         </Row>
-        
+        <Row>
+          <Col span={24} className="speech-file-text-result-container">
+            {speechToTextSucess ? (
+              <Alert message="Conversion Success" type="success" showIcon />
+            ) : null}
+          </Col>
+        </Row>
       </div>
       <Converterbox value={speechText} />
       {speechText ? <Rating id={id} message={speechText} /> : <p></p>}
-      
+   
     </div>
   );
 }
+
 export default Recordlive;
