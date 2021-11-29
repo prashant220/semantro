@@ -8,7 +8,7 @@ import "antd/dist/antd.css";
 import { useReactMediaRecorder } from "react-media-recorder";
 import Converterbox from "../Converterbox";
 import Rating from "../Rating";
-import { Modal, Space } from "antd";
+import { Modal,Result, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { Prompt } from "react-router-dom";
@@ -87,14 +87,7 @@ console.log(startRecording)
       },
     });
   }
-function Display(){
-  if(status=="idle"){
-   return ("off")
-  }
-  else{
-    return ("on")
-  }
-}
+
  console.log(status)
   
   function changeFormat() {
@@ -141,10 +134,42 @@ function Display(){
           </div>
         );
       }
+
       {
-        Display()
-      }
-       {
+        if (openMic == true && status=="idle") {
+          return (
+            <div class="row">
+              <div className="row">
+                <p className="stop_text">Your mic on turned off..Please enable your mic</p>
+              </div>
+             <Row>
+               <Col xl={8} md={8} xs={8}></Col>
+               <Col>
+               <Result
+    status="404"
+ 
+    subTitle="Sorry, your mic is disabled."
+    extra={<Button type="primary"  style={{backgroundColor:"#cf481b" ,height:'43px',border:'none'}}
+      onClick={() => {
+      setOpenMic(false);
+      setPlay(false);
+      setId(null);
+      setSpeechText(null);
+    }}>Back Home</Button>}
+  />
+
+               </Col>
+               <Col></Col>
+          
+             </Row>
+            
+          
+            </div>
+          );
+        } 
+        
+ 
+      
         if (openMic == true && play == false) {
           return (
             <div class="row">
