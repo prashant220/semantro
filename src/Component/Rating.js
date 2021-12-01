@@ -48,11 +48,12 @@ export default function Rating(props) {
   };
  console.log(ratingChanged)
   return (
-    <Row>
+   
+      <Row>
    <Col xl={0} md={0} xs={0}></Col>
    <Col xl={24} md={24} xs={24}>
    <div className="rating-box">
-      <p style={{fontSize:'16px',color:'black',color:'rgb(207, 72, 27)',margin:'auto',lineHeight:'28px'}}>Rate this transcribe</p>
+      <p style={{fontSize:'16px',color:'black',color:'rgb(207, 72, 27)',margin:'auto',lineHeight:'28px',marginRight:'5%'}}>Rate this transcribe</p>
        
        
        

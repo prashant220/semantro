@@ -26,7 +26,7 @@ export default function Converterbox(props) {
     <div>
       <div className="text-border">
         <Row>
-          <Col xl={7} md={5} xs={24} xs={4} ></Col>
+          <Col xl={7} md={12} xs={4}  ></Col>
           <Col xl={10} >
             <p className="converted_text">Converted Nepali Text</p>
           </Col>
