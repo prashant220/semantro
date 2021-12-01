@@ -81,6 +81,7 @@ console.log(startRecording)
         setPlay(false);
         setId(null);
         setSpeechText(null);
+        setSpeechToTextLoading(false)
       },
       onCancel() {
         console.log("Cancel");
@@ -116,10 +117,11 @@ console.log(startRecording)
                     setIsChanged(true);
                   }}
                   style={{
-                    padding: "26px 40px",
-                    lineHeight: "0px",
+                 
                     borderRadius: "8px",
                     border: "none",
+                    padding:'26px 40px',
+                    lineHeight:'0'
                   }}
                   className="start-button"
                   type="primary"
@@ -140,16 +142,17 @@ console.log(startRecording)
           return (
             <div class="row">
               <div className="row">
-                <p className="stop_text">Your mic on turned off..Please enable your mic</p>
+                <p className="stop_text">Your mic is turned off..Please enable your mic</p>
               </div>
              <Row>
-               <Col xl={8} md={8} xs={8}></Col>
+               <Col xl={9} md={8} xs={8}></Col>
                <Col>
                <Result
     status="404"
  
     subTitle="Sorry, your mic is disabled."
-    extra={<Button type="primary"  style={{backgroundColor:"#cf481b" ,height:'43px',border:'none'}}
+    extra={<Button type="primary"  style={{backgroundColor:"#cf481b" ,height:'43px',border:'none',   padding: "26px 40px",
+    lineHeight: "0px",    borderRadius: "8px",}}
       onClick={() => {
       setOpenMic(false);
       setPlay(false);
@@ -250,7 +253,7 @@ console.log(startRecording)
 
                 <Row style={{ marginBottom: "10vh", marginTop: "5vh" }}>
                   <Col xl={8} md={8} xs={6}></Col>
-                  <Col>
+                  <Col xl={8}>
                     <audio src={mediaBlobUrl} controls loop type={true} />
                   </Col>
                   <Col></Col>
@@ -331,6 +334,8 @@ console.log(startRecording)
       </div>
       <Converterbox value={speechText} />
       {speechText ? <Rating id={id} message={speechText} /> : <p></p>}
+     {/* <Rating id={id} message={speechText} />  */}
+
    
     </div>
   );

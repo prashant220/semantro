@@ -1,10 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
-.box{
-    padding: 15px 20px;
-/* background:#175CBF; */
 
-}
 .text {
     font-family: 'Poppins', sans-serif;
   
@@ -19,6 +15,16 @@ line-height: 37px;
 /* identical to box height */
 
 color:white;
+}
+.ant-steps {
+   
+    width: 80%!important;
+  
+    margin-left: 16%!important;
+   
+}
+.ant-steps-item-title {
+    line-height: 40px;
 }
 .lower-text{
     font-family: 'Poppins', sans-serif;
@@ -50,4 +56,9 @@ color: #e6501e;
 .lower-text{
     text-align: center;
    
+}
+.anticon svg {
+  
+   
+    color: #E6501F;
 }

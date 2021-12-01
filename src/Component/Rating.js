@@ -52,7 +52,7 @@ export default function Rating(props) {
    <Col xl={0} md={0} xs={0}></Col>
    <Col xl={24} md={24} xs={24}>
    <div className="rating-box">
-      <p style={{fontSize:'16px',color:'black',color:'rgb(207, 72, 27)',margin:'auto',marginRight:'45px'}}>Rate this transcribe</p>
+      <p style={{fontSize:'16px',color:'black',color:'rgb(207, 72, 27)',margin:'auto',lineHeight:'28px'}}>Rate this transcribe</p>
        
        
        
@@ -65,7 +65,7 @@ export default function Rating(props) {
     onChange={ratingChanged}
     size={26}
     activeColor="#ffd700"
-    
+   
     
     
   

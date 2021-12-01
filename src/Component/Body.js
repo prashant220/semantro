@@ -1,41 +1,20 @@
 import React from "react";
 import "../css/body.css";
-import { Row, Col } from "antd";
+import { Steps } from 'antd';
+import {AudioOutlined ,CloudUploadOutlined,  FileSyncOutlined , SmileOutlined } from '@ant-design/icons';
 
 export default function Body() {
+  const { Step } = Steps;
   return (
-    <div className="box">
-      <Row>
-        <p
-          className="upper-text"
-          style={{
-            fontSize: "53px",
-            margin: "auto",
-            display: "block",
-            textShadow: " 2px 2px #rgb(70, 65, 65) ",
-            marginLeft:'48%'
-          
-         
-          }}
-        >
-          Semantro
-        </p>
-      </Row>
-      <Row>
-        <p
-          style={{
-            fontSize: "20px",
-            margin: "5vh auto auto 48%",
-            display: "block",
-            
-           
-        
-         
-          }}
-        >
-          Neplai speech to text translator
-        </p>
-      </Row>
+    <div >
+     
+      <p className="upper-text" style={{marginLeft:'14%',fontSize:'43px',marginTop:'31px'}}> Nepali Speech To Text </p>
+      <Steps>
+    <Step status="finish" title="Record" icon={<AudioOutlined />} />
+    <Step status="finish" title="Upload" icon={<CloudUploadOutlined />} />
+    <Step status="process" title="Convert" icon={ <FileSyncOutlined />} />
+    
+  </Steps>
     </div>
   );
 }

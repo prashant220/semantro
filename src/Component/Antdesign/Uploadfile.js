@@ -97,11 +97,7 @@ export default class Uploadfile extends Component {
     return (
       <div>
         <div className="site-card-border-less-wrapper">
-          <Card
-            title="Upload or drag audio file"
-            style={{ width: "97%" }}
-          >
-          
+          <Card title="Upload or drag audio file" style={{ width: "97%" }}>
             <Form
               name="uploadAudioFileForm"
               onFinish={this.handleSpeechToTextForm}
@@ -122,90 +118,51 @@ export default class Uploadfile extends Component {
 
               {!this.state.speechText ? (
                 <Row>
-                  <Col xl={7} md={7} xs={3} ></Col>
-                  <Col xl={10} md={10} xs={18} >
-                  <Button
-                  htmlType="submit"
-                  loading={this.state.speechToTextLoading}
-                  type="primary"
-                  style={{
-                    padding: "26px 40px",
-                    lineHeight: "0px",
-                    borderRadius: "8px",
-                    border: "none",
-      
-                    backgroundColor: " #e6501e",
-                    marginBottom:'4vh'
-                  }}
-                >
-                  Convert to text
-                </Button>
+                  <Col xl={7} md={7} xs={3}></Col>
+                  <Col xl={10} md={10} xs={18}>
+                    <Button
+                      htmlType="submit"
+                      loading={this.state.speechToTextLoading}
+                      type="primary"
+                      style={{
+                        padding: "26px 40px",
+                        lineHeight: "0px",
+                        borderRadius: "8px",
+                        border: "none",
 
+                        backgroundColor: " #e6501e",
+                        marginBottom: "4vh",
+                      }}
+                    >
+                      Convert to text
+                    </Button>
                   </Col>
                   <Col xl={8}></Col>
-                  
-             
                 </Row>
               ) : (
+                <Row>
+                <Col xl={7} md={7} xs={3}></Col>
+                <Col xl={10} md={10} xs={18}>
                 <Button
                   onClick={this.showConfirm}
                   className="resetfile_button"
                   type="primary"
-                
                 >
                   Reset
                 </Button>
+                </Col>
+                <Col xl={8}></Col>
+                </Row>
               )}
-
-          
-              {/* {
-                this.state.speechToTextSuccess?(
-                  <Row>
-                  <Col span={24 } className="speech-file-text-result-container">
-                
-                          <Alert
-                            message="Conversion Success"
-                            type="success"
-                            style={{  marginTop:'3%',marginLeft:'40%'}}
-                            showIcon/>
-                       
-                      
-                        
-                       
-                   </Col>
-                  
-                   </Row>
-                ):null
-              }
-            */}
-          
-         
-              
             </Form>
-            
           </Card>
-          {
-            this.state.speechToTextSuccess?
-
+          {this.state.speechToTextSuccess ? (
             <Row>
-            <Col span={24 } className="speech-file-text-result-container">
-          
-                    <Alert
-                      message="Conversion Success"
-                      type="success"
-                   
-                      showIcon/>
-                 
-                
-                  
-                 
-             </Col>
-            
-             </Row>:null
-    
-
-          }
-   
+              <Col span={24} className="speech-file-text-result-container">
+                <Alert message="Conversion Success" type="success" showIcon />
+              </Col>
+            </Row>
+          ) : null}
         </div>
 
         <Converterbox value={this.state.speechText} />

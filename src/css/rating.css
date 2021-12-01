@@ -16,7 +16,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,300&display=swap");
 .ant-modal-title {
   text-align: center !important;
-  font-family: "Poppins", sans-serif;
+ color:#e6501e;
 }
 
 .alert::before {
@@ -104,4 +104,7 @@
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
   margin-left: 2%;
   margin-bottom: 3vh;
+}
+.react-stars-wrapper-03972771425887347{
+margin-left: 5%!important;
 }
