@@ -11,10 +11,13 @@ import Rating from "../Rating";
 import { Modal, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Prompt } from "react-router-dom";
+import { formatCountdown } from "antd/lib/statistic/utils";
+
 const { Dragger } = Upload;
 const { TextArea } = Input;
 
 export default class Uploadfile extends Component {
+  formRef = React.createRef();
   constructor(props) {
     super(props);
     this.state = {
@@ -29,17 +32,19 @@ export default class Uploadfile extends Component {
       isChanged:false
     };
     this.showConfirm = this.showConfirm.bind(this);
+  
   }
+  
 
   handleSpeechToTextForm = (e) => {
     console.log(e);
 
     const audioFile = e.audioFile.file.originFileObj;
     this.handleSpeechToTextRequest(audioFile);
-    
+   
    console.log(audioFile)
-  };
-
+ 
+  }
   handleSpeechToTextRequest = (audioFile) => {
     let endpoint = "http://3.138.164.184:7000/speech/";
 
@@ -61,6 +66,7 @@ export default class Uploadfile extends Component {
           speechText: res.data.transcription,
           id: res.data.audio_id,
           speechToTextLoading: false,
+          fileaudio:audioFile,
           disabled:false,
           visible:true,
 
@@ -79,25 +85,31 @@ export default class Uploadfile extends Component {
     });
   };
 
+
   showConfirm = () => {
     const { confirm } = Modal;
-
+   
     confirm({
       title: "Are you sure you want to start a new recording?",
       icon: <ExclamationCircleOutlined />,
-      content: "Your current recording will be deleted",
+      content: "Click to destroy all",
+    
       onOk: () => {
         console.log("OK");
+        
         this.setState({
-          fileaudio: null,
+         fileaudio:null,
           id: "",
           speechText: "",
+          disable:true,
         });
+        this.formRef.current.resetFields();
       },
       onCancel() {
         console.log("Cancel");
       },
     });
+    
    
   };
   active = () => {
@@ -128,6 +140,7 @@ export default class Uploadfile extends Component {
         <div className="site-card-border-less-wrapper">
           <Card title="Upload or drag audio file" style={{ width: "97%" }}>
             <Form
+            ref={this.formRef}
               name="uploadAudioFileForm"
               onFinish={this.handleSpeechToTextForm}
               layout="vertical"
@@ -192,16 +205,14 @@ export default class Uploadfile extends Component {
                 }}
            
                 
-                  onClick={this.showConfirm}
-
-                  // onClick={()=>
-                  // this.showConfirm,
-                  // this.setState({
-                  //  fileaudio:null
-                  // })
+                  onClick={()=>this.showConfirm()
+               
+                          
                   
-                  // }
-             
+                  
+                  }
+
+         
                   type="primary"
                 >
                   Reset
