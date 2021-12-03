@@ -22,7 +22,7 @@ function Recordlive(props) {
   const [openMic, setOpenMic] = useState(false);
   const [record, setRecord] = useState("Record audio");
   const [play, setPlay] = useState(false);
-
+  const [visible, setVisible] = useState(null);
   const { status, startRecording, stopRecording, blob, mediaBlobUrl } =
     useReactMediaRecorder({
       audio: true,
@@ -37,18 +37,24 @@ console.log(startRecording)
   const file = new File([blob], "filename.mp3");
   console.log(file);
 
-
-
+ 
 
   const handleSpeechToTextRequest = (audioFile) => {
     let endpoint = "http://3.138.164.184:7000/speech/";
     let file = audioFile;
     setSpeechToTextLoading(true);
+    // setVisible(true)
+    // setTimeout(() => {setVisible(false)}, 3000)
+ 
+   
+    
     console.log(file, endpoint);
     r_getSpeechIntoText(audioFile, endpoint).then((res) => {
       console.log(res.data.transcription);
       if (res.data.status === "success") {
         setspeechToTextSucess(true);
+        setVisible(true)
+    setTimeout(() => {setVisible(false)}, 3000)
         setId(res.data.audio_id);
         setSpeechText(res.data.transcription);
         setSpeechToTextLoading(false);
@@ -66,9 +72,7 @@ console.log(startRecording)
     handleSpeechToTextRequest(recordedAudioFile);
   };
   console.log(status);
-  const change = () => {
-    <p>Hello</p>;
-  };
+  
   const { confirm } = Modal;
   function showConfirm() {
     confirm({
@@ -90,6 +94,7 @@ console.log(startRecording)
   }
 
  console.log(status)
+ 
   
   function changeFormat() {
    
@@ -283,11 +288,12 @@ console.log(startRecording)
                       type="primary"
                       size="large"
                       htmlType="submit"
-                      onClick={() => {
-                        handleRecordedAudioUpload();
-                        setIsChanged(false);
-                      }}
-                      loading={speechToTextLoading}
+                     
+                     loading={speechToTextLoading} 
+                     onClick={() => {
+                      handleRecordedAudioUpload();
+                      setIsChanged(false);
+                    }}
                       style={{
                         padding: "26px 40px",
                         lineHeight: "0px",
@@ -326,8 +332,11 @@ console.log(startRecording)
         <Card style={{ width: "97%" }}>{changeFormat()}</Card>
         <Row>
           <Col span={24} className="speech-file-text-result-container">
-            {speechToTextSucess ? (
+            {visible ? (
+           
               <Alert message="Conversion Success" type="success" showIcon />
+              
+             
             ) : null}
           </Col>
         </Row>

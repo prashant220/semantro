@@ -13,12 +13,14 @@ export default function Navigation() {
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="#home" >
+          <Link to="/">
           <img
             alt=""
             src={Sem}
             width="200"
             className="d-inline-block align-top"
           />
+          </Link>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

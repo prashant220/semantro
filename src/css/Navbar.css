@@ -111,6 +111,3 @@ a:hover{
     color: #cf481b !important;
 }
 
-a:active>a{
-color: red;
-}

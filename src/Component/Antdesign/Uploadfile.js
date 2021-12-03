@@ -10,18 +10,23 @@ import Converterbox from "../Converterbox";
 import Rating from "../Rating";
 import { Modal, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-
+import { Prompt } from "react-router-dom";
 const { Dragger } = Upload;
 const { TextArea } = Input;
+
 export default class Uploadfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+  
       speechText: "",
       speechToTextSuccess: false,
       speechToTextLoading: false,
-      fileaudio: "",
+      fileaudio: null,
       id: "",
+      disable:true,
+      visible:false,
+      isChanged:false
     };
     this.showConfirm = this.showConfirm.bind(this);
   }
@@ -31,6 +36,8 @@ export default class Uploadfile extends Component {
 
     const audioFile = e.audioFile.file.originFileObj;
     this.handleSpeechToTextRequest(audioFile);
+    
+   console.log(audioFile)
   };
 
   handleSpeechToTextRequest = (audioFile) => {
@@ -40,6 +47,8 @@ export default class Uploadfile extends Component {
       fileaudio: audioFile,
       speechToTextLoading: true,
       speechToTextSuccess: false,
+   
+      
     });
 
     console.log(this.state.fileaudio, endpoint);
@@ -52,7 +61,15 @@ export default class Uploadfile extends Component {
           speechText: res.data.transcription,
           id: res.data.audio_id,
           speechToTextLoading: false,
+          disabled:false,
+          visible:true,
+
         });
+        setTimeout(()=>{
+          this.setState({
+            visible:false
+          })
+        },3000)
         console.log(res.data.audio_id);
       } else if (res.data.status === "error") {
         this.setState({
@@ -72,7 +89,7 @@ export default class Uploadfile extends Component {
       onOk: () => {
         console.log("OK");
         this.setState({
-          fileaudio: "",
+          fileaudio: null,
           id: "",
           speechText: "",
         });
@@ -81,9 +98,14 @@ export default class Uploadfile extends Component {
         console.log("Cancel");
       },
     });
+   
   };
+  active = () => {
+    this.setState({disable: false});
+  }
 
   render() {
+
     const uploaderProps = {
       name: "file",
       multiple: false,
@@ -92,21 +114,30 @@ export default class Uploadfile extends Component {
       customRequest: this.dummyRequest,
       onChange: this.handleFileUploadChange,
       beforeUpload: this.beforeUpload,
+      
     };
-    const { recordState } = this.state;
+  
     return (
       <div>
+         <Prompt
+        when={this.state.isChanged}
+        message={(location) =>
+          `Are you sure you want to go to ${location.pathname}`
+        }
+      />
         <div className="site-card-border-less-wrapper">
           <Card title="Upload or drag audio file" style={{ width: "97%" }}>
             <Form
               name="uploadAudioFileForm"
               onFinish={this.handleSpeechToTextForm}
               layout="vertical"
+              onChange={this.active}
             >
               <Form.Item
                 name="audioFile"
                 rules={[
                   { required: true, message: "Please select audio file!" },
+                  
                 ]}
               >
                 <Dragger {...uploaderProps}>
@@ -116,21 +147,30 @@ export default class Uploadfile extends Component {
                 </Dragger>
               </Form.Item>
 
-              {!this.state.speechText ? (
+              {!this.state.speechText?  (
                 <Row>
                   <Col xl={7} md={7} xs={3}></Col>
                   <Col xl={10} md={10} xs={18}>
                     <Button
                       htmlType="submit"
+                      onClick={()=>
+                      this.setState({
+                        isChanged:true
+                      })
+                      
+                      }
                       loading={this.state.speechToTextLoading}
                       type="primary"
+                      disabled={this.state.disable}
+                  
                       style={{
                         padding: "26px 40px",
                         lineHeight: "0px",
                         borderRadius: "8px",
                         border: "none",
-
-                        backgroundColor: " #e6501e",
+                      backgroundColor:this.state.disable?'#babcbf':"#e6501e",
+                      color:this.state.disable?"white":null,
+                   
                         marginBottom: "4vh",
                       }}
                     >
@@ -140,26 +180,40 @@ export default class Uploadfile extends Component {
                   <Col xl={8}></Col>
                 </Row>
               ) : (
-                <Row>
-                <Col xl={7} md={7} xs={3}></Col>
-                <Col xl={10} md={10} xs={18}>
+                
                 <Button
+                style={{
+                  padding: "26px 60px",
+                  lineHeight: "0px",
+                  borderRadius: "8px",
+                  border: "none",
+                  marginBottom: "4vh",
+                  backgroundColor:'grey'
+                }}
+           
+                
                   onClick={this.showConfirm}
-                  className="resetfile_button"
+
+                  // onClick={()=>
+                  // this.showConfirm,
+                  // this.setState({
+                  //  fileaudio:null
+                  // })
+                  
+                  // }
+             
                   type="primary"
                 >
                   Reset
                 </Button>
-                </Col>
-                <Col xl={8}></Col>
-                </Row>
+             
               )}
             </Form>
           </Card>
-          {this.state.speechToTextSuccess ? (
+          {this.state.visible ? (
             <Row>
               <Col span={24} className="speech-file-text-result-container">
-                <Alert message="Conversion Success" type="success" showIcon />
+                <Alert message="Conversion Success" type="success" showIcon  />
               </Col>
             </Row>
           ) : null}

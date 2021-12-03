@@ -66,7 +66,7 @@
 }
 
 .ant-upload-list-item {
-  margin-left: 40% !important;
+  margin-left: 44% !important;
 }
 .ant-result{
   padding: 10px!important;
@@ -165,6 +165,8 @@
 .ant-tabs {
   width: 100%;
 }
+
+   
 
 /* .box {
   position: absolute;

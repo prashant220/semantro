@@ -7,7 +7,7 @@ import {BrowserRouter} from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
-      <BrowserRouter  basename='/react'> 
+      <BrowserRouter  basename='/speech'> 
     <App />
     </BrowserRouter> 
   </React.StrictMode>,

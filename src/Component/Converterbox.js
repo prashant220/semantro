@@ -16,8 +16,11 @@ import "../css/converter_box.css";
 const { TextArea } = Input;
 
 export default function Converterbox(props) {
-  const [display, setDisplay] = useState("");
+ 
   const [visible, setVisible] = useState(false);
+  const[disable,setDisable]=useState(true)
+
+  console.log(props.value)
   const displayMessage = () => {
     setVisible(true)
     setTimeout(() => {setVisible(false)}, 3000)
@@ -33,12 +36,20 @@ export default function Converterbox(props) {
           <Col xl={2} md={3} xs={6}></Col>
           <Col >{visible ?<p style={{fontSize:'16px',color:'red'}}>Copied!</p> : null}</Col>
           <Col >
-            
-            <CopyToClipboard text={props.value}>
-              <button className="copy" onClick={displayMessage}>
+          
+              <CopyToClipboard text={props.value}>
+                {
+                  props.value?     <button className="copy" onClick={displayMessage}>
+                  Copy to clipboard
+                </button>:
+              <  button disabled={disable} className="copy" onClick={displayMessage}>
                 Copy to clipboard
               </button>
+                }
+         
             </CopyToClipboard>
+            
+     
           </Col>
         </Row>
 
@@ -46,6 +57,7 @@ export default function Converterbox(props) {
           className="textarea-for-text"
           placeholder="Speech To Text Here"
           value={props.value}
+         
           style={{
             transition:
               "border-color .15s ease-in-out,box-shadow .15s ease-in-out",

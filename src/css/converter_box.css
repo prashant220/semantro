@@ -13,6 +13,12 @@
   margin-right: 61px;
 }
 
+button[disabled]{
+ background-color: #babcbf;
+  color: #fff;
+ 
+} 
+  
 
 .text {
   text-align: center;
