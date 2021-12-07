@@ -70,14 +70,7 @@ button[disabled]{
 
   float: right;
 }
-textarea {
-  width: 96%;
-  position: absolute;
-  left: 2%;
 
-  margin-left: 2%;
-  height: 280px;
-}
 /* .ant-card-body {
   padding: 0px !important;
 } */

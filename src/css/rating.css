@@ -99,9 +99,11 @@
   }
 }
 .rating-box {
-  padding: 45px;
-  width: 93%;
+  
+  width: 100%;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-  margin-left: 2%;
+  margin-top: 5vh;
   margin-bottom: 3vh;
+  height: 25vh;
+  padding-top: 25px;
 }

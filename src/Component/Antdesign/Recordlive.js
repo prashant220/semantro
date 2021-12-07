@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./css/uploadfile.css";
 import { Upload, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
@@ -12,6 +12,7 @@ import { Modal,Result, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { Prompt } from "react-router-dom";
+import { clear } from "dom-helpers";
 
 function Recordlive(props) {
   const [speechToTextLoading, setSpeechToTextLoading] = useState(false);
@@ -23,20 +24,28 @@ function Recordlive(props) {
   const [record, setRecord] = useState("Record audio");
   const [play, setPlay] = useState(false);
   const [visible, setVisible] = useState(null);
+  const [second, setSecond] = useState("00");
+  const [minute, setMinute] = useState("00");
+  const [isActive, setIsActive] = useState(false);
+  const [counter, setCounter] = useState(0);
   const { status, startRecording, stopRecording, blob, mediaBlobUrl } =
     useReactMediaRecorder({
       audio: true,
       onStop: (blobUrl, blob) => setrecordedAudioFile(blob),
-      startRecording: () => setOpenMic(true),
+      startRecording: () => 
+      setOpenMic(true),
+    
+     
     });
-console.log(startRecording)
+
+  
   console.log(openMic);
   console.log(mediaBlobUrl);
   console.log(blob);
 
   const file = new File([blob], "filename.mp3");
   console.log(file);
-
+console.log(file.size)
  
 
   const handleSpeechToTextRequest = (audioFile) => {
@@ -65,6 +74,8 @@ console.log(startRecording)
       }
     });
   };
+  
+ 
 
   const handleRecordedAudioUpload = () => {
     setSpeechToTextLoading(false);
@@ -94,8 +105,39 @@ console.log(startRecording)
   }
 
  console.log(status)
- 
-  
+ useEffect(() => {
+  let intervalId;
+
+  if (isActive) {
+    intervalId = setInterval(() => {
+      const secondCounter = counter % 60;
+      const minuteCounter = Math.floor(counter / 60);
+
+      let computedSecond =
+        String(secondCounter).length === 1
+          ? `0${secondCounter}`
+          : secondCounter;
+      let computedMinute =
+        String(minuteCounter).length === 1
+          ? `0${minuteCounter}`
+          : minuteCounter;
+
+      setSecond(computedSecond);
+      setMinute(computedMinute);
+
+      setCounter((counter) => counter + 1);
+    }, 1000);
+  }
+
+  return () => clearInterval(intervalId);
+}, [isActive, counter]);
+function stopTimer() {
+  setIsActive(false);
+  setCounter(0);
+  setSecond("00");
+  setMinute("00");
+}
+
   function changeFormat() {
    
      
@@ -115,11 +157,18 @@ console.log(startRecording)
               <Col>
                 <Button
                   onClick={() => {
+                    setIsActive(true)
                     startRecording();
                     setOpenMic(true);
                     setRecord("Recording...");
                     setspeechToTextSucess(false);
                     setIsChanged(true);
+                    setTimeout(()=>{
+                      stopRecording();
+                      setPlay(true)
+                   
+                    },30000)
+                
                   }}
                   style={{
                  
@@ -147,11 +196,11 @@ console.log(startRecording)
           return (
             <div class="row">
               <div className="row">
-                <p className="stop_text">Your mic is turned off..Please enable your mic</p>
+                <p className="stop_text">Your mic is turned off..Please enable your mic from browser</p>
               </div>
              <Row>
-               <Col xl={9} md={8} xs={8}></Col>
-               <Col>
+               <Col xl={8} md={8} ></Col>
+               <Col xs={24}>
                <Result
     status="404"
  
@@ -184,7 +233,7 @@ console.log(startRecording)
               <div className="row">
                 <p className="stop_text">Speak now...{status}</p>
               </div>
-
+         
               <div class="row mic">
                 <div class="object">
                   <div class="outline"></div>
@@ -195,6 +244,15 @@ console.log(startRecording)
                   </div>
                 </div>
               </div>
+              <Row>
+                <Col xl={10 }></Col>
+                <Col xl={3}>
+                  <p>Max duration 30 seconds</p>
+                <p id="counter" style={{marginLeft:'15%',fontSize:'30px'}}>{minute}:{second}</p>
+                </Col>
+                <Col xl={8}></Col>
+               
+                </Row>
 
               <Row gutter={[16, 24]} style={{ paddingBottom: "10px" }}>
                 <Col xl={6} md={0} xs={0}></Col>
@@ -203,9 +261,9 @@ console.log(startRecording)
                   <Button
                     onClick={() => {
                       stopRecording();
-
-                      setPlay(true);
-
+                     stopTimer()
+                         setPlay(true);  
+                    
                       setRecord("Record audio");
                     }}
                     className="stop-button"
@@ -226,6 +284,9 @@ console.log(startRecording)
                   <Button
                     onClick={() => {
                       showConfirm();
+                      stopTimer()
+                     
+                
                     }}
                     className="reset-button"
                     type="primary"
@@ -269,6 +330,8 @@ console.log(startRecording)
                     <Button
                       onClick={() => {
                         showConfirm();
+                        stopTimer()
+                      
                       }}
                       className="reset_button"
                       type="primary"
@@ -293,6 +356,9 @@ console.log(startRecording)
                      onClick={() => {
                       handleRecordedAudioUpload();
                       setIsChanged(false);
+                     stopTimer()
+                   
+                
                     }}
                       style={{
                         padding: "26px 40px",
@@ -329,7 +395,7 @@ console.log(startRecording)
         }
       />
       <div className="site-card-border-less-wrapper">
-        <Card style={{ width: "97%" }}>{changeFormat()}</Card>
+        <Card>{changeFormat()}</Card>
         <Row>
           <Col span={24} className="speech-file-text-result-container">
             {visible ? (

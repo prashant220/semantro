@@ -10,12 +10,15 @@ export default function Rating(props) {
 
   
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+ 
   const ratingChanged = (new_Rating) => {
+   
+   
     const bodyFormData = new FormData();
   bodyFormData.append('audio_id', props.id);
   bodyFormData.append('transcription', props.message);
   bodyFormData.append('feedback', new_Rating);
+   
     axios({
       method: "post",
       url: "http://3.138.164.184:7000/feedback/",
@@ -59,7 +62,7 @@ export default function Rating(props) {
        
        <div>
    <Row>
-     <Col xl={10} md={10} xs={6}></Col>
+     <Col xl={10} md={10} xs={7}></Col>
      <Col  md={14} xs={14}> 
      <ReactStars
     count={5}

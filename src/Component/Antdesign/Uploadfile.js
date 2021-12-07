@@ -11,7 +11,7 @@ import Rating from "../Rating";
 import { Modal, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Prompt } from "react-router-dom";
-import { formatCountdown } from "antd/lib/statistic/utils";
+
 
 const { Dragger } = Upload;
 const { TextArea } = Input;
@@ -29,22 +29,53 @@ export default class Uploadfile extends Component {
       id: "",
       disable:true,
       visible:false,
-      isChanged:false
+      isChanged:false,
+      large:false,
+    
     };
     this.showConfirm = this.showConfirm.bind(this);
+    
   
   }
-  
 
   handleSpeechToTextForm = (e) => {
     console.log(e);
 
     const audioFile = e.audioFile.file.originFileObj;
+  
     this.handleSpeechToTextRequest(audioFile);
-   
-   console.log(audioFile)
+   this.beforeUpload(audioFile)
+
  
   }
+  handleFileUploadChange=(audioFile)=>{
+    
+    this.setState({disable: false});
+  
+ 
+
+  }
+   beforeUpload=(audioFile)=> {
+   console.log(audioFile)
+   console.log(audioFile.type)
+   if(audioFile.type=="audio/mpeg"&&audioFile.size>7000000||audioFile.type=="audio/wav"&&audioFile.size>2000000 ){
+    console.log("greater")
+    this.setState({
+      large:true
+    })
+
+    }
+    else{
+      this.setState({
+        large:false
+      })
+      console.log("smaller")
+    }
+   }
+ 
+  
+
+
   handleSpeechToTextRequest = (audioFile) => {
     let endpoint = "http://3.138.164.184:7000/speech/";
 
@@ -112,8 +143,12 @@ export default class Uploadfile extends Component {
     
    
   };
-  active = () => {
+  active = (e) => {
     this.setState({disable: false});
+
+    
+   
+   
   }
 
   render() {
@@ -126,8 +161,9 @@ export default class Uploadfile extends Component {
       customRequest: this.dummyRequest,
       onChange: this.handleFileUploadChange,
       beforeUpload: this.beforeUpload,
-      
+   
     };
+    
   
     return (
       <div>
@@ -144,7 +180,13 @@ export default class Uploadfile extends Component {
               name="uploadAudioFileForm"
               onFinish={this.handleSpeechToTextForm}
               layout="vertical"
-              onChange={this.active}
+              // onChange={this.active}
+          onChange={this.handleFileUploadChange}
+              
+              
+             
+
+
             >
               <Form.Item
                 name="audioFile"
@@ -159,7 +201,18 @@ export default class Uploadfile extends Component {
                   </p>
                 </Dragger>
               </Form.Item>
-
+           {
+             this.state.large?     <Row style={{marginBottom:'5px'}}>
+             <Col xl={8} md={9} xs={5}></Col>
+             <Col xl={8} >
+             <Alert message="File size too large" type="warning" showIcon closable />
+             </Col>
+             <Col xl={8}></Col>
+           </Row>:null
+           }
+           
+              
+        
               {!this.state.speechText?  (
                 <Row>
                   <Col xl={7} md={7} xs={3}></Col>
@@ -174,6 +227,7 @@ export default class Uploadfile extends Component {
                       }
                       loading={this.state.speechToTextLoading}
                       type="primary"
+                   
                       disabled={this.state.disable}
                   
                       style={{
@@ -181,7 +235,7 @@ export default class Uploadfile extends Component {
                         lineHeight: "0px",
                         borderRadius: "8px",
                         border: "none",
-                      backgroundColor:this.state.disable?'#babcbf':"#e6501e",
+                      backgroundColor:this.state.disable || this.state.large?'#babcbf':"#e6501e",
                       color:this.state.disable?"white":null,
                    
                         marginBottom: "4vh",
@@ -219,6 +273,7 @@ export default class Uploadfile extends Component {
                 </Button>
              
               )}
+        
             </Form>
           </Card>
           {this.state.visible ? (

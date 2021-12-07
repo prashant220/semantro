@@ -27,13 +27,13 @@ export default function Converterbox(props) {
   };
   return (
     <div>
-      <div className="text-border">
-        <Row>
-          <Col xl={7} md={12} xs={4}  ></Col>
-          <Col xl={10} >
+      <div>
+      <Row>
+          <Col xl={7} md={24} xs={6}  ></Col>
+          <Col xl={10} md={10}>
             <p className="converted_text">Converted Nepali Text</p>
           </Col>
-          <Col xl={2} md={3} xs={6}></Col>
+          <Col xl={2} md={3} xs={7}></Col>
           <Col >{visible ?<p style={{fontSize:'16px',color:'red'}}>Copied!</p> : null}</Col>
           <Col >
           
@@ -53,7 +53,7 @@ export default function Converterbox(props) {
           </Col>
         </Row>
 
-        <TextArea
+        {/* <TextArea
           className="textarea-for-text"
           placeholder="Speech To Text Here"
           value={props.value}
@@ -65,7 +65,8 @@ export default function Converterbox(props) {
             height: "40vh",
             width: "100%",
           }}
-        />
+        /> */}
+        <TextArea   value={props.value}style={{height:"40vh"}} />
       </div>
     </div>
   );

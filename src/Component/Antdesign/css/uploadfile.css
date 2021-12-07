@@ -5,7 +5,11 @@
 
 .site-card-border-less-wrapper {
   margin-top: 5vh;
+  margin-bottom: 5vh;
 }
+/* .ant-tabs-left > .ant-tabs-content-holder > .ant-tabs-content > .ant-tabs-tabpane, .ant-tabs-left > div > .ant-tabs-content-holder > .ant-tabs-content > .ant-tabs-tabpane {
+  padding-left: 0px!important;
+} */
 
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
   font-size: 17px !important;
@@ -64,7 +68,11 @@
   margin-left: 94px;
   margin-top: 7px;
 }
-
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap {
+ 
+  justify-content: space-around!important;
+ 
+}
 .ant-upload-list-item {
   margin-left: 44% !important;
 }
@@ -183,7 +191,7 @@
 }
 
 .mic {
-  margin-top: 8vh;
+  margin-top: 3vh;
   margin-bottom: 8vh;
   height: 100px;
 }

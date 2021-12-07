@@ -8,7 +8,7 @@ export default function Body() {
   return (
     <div >
      
-      <p className="upper-text" style={{marginLeft:'14%',fontSize:'25px',marginTop:'31px'}}> Nepali Speech To Text </p>
+      <p className="upper-text" style={{marginLeft:'12%',fontSize:'25px',marginTop:'31px'}}> Nepali Speech To Text </p>
       <Steps>
     <Step title="Record" icon={<AudioOutlined />} />
     <Step title="Upload" icon={<CloudUploadOutlined />} />

@@ -107,7 +107,7 @@ export default function Contact() {
               <Form.Label column sm={2} style={{ color: "#e6501e" }}>
                 Name*
               </Form.Label>
-              <Col sm={18}>
+              <Col  sm={18}>
                 <Form.Control
                   type="text"
                   placeholder="name"
@@ -211,7 +211,7 @@ export default function Contact() {
                 </Button>
              <Row  style={{marginTop:'2vh'}}>
                <Col xl={6}></Col>
-               <Col xl={8}>
+               <Col xl={24}>
 
                {sent ? (
         <Alert message="Your message has been sent" type="success" closable afterClose={handleClose}  id="alert"/>
