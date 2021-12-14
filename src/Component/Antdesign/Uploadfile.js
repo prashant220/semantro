@@ -11,7 +11,7 @@ import Rating from "../Rating";
 import { Modal, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Prompt } from "react-router-dom";
-
+import {speech} from '../../api/data'
 
 const { Dragger } = Upload;
 const { TextArea } = Input;
@@ -77,7 +77,7 @@ export default class Uploadfile extends Component {
 
 
   handleSpeechToTextRequest = (audioFile) => {
-    let endpoint = "http://3.138.164.184:7000/speech/";
+    let endpoint =speech;
 
     this.setState({
       fileaudio: audioFile,

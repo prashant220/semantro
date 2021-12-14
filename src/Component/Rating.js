@@ -6,24 +6,30 @@ import ReactStars from "react-rating-stars-component";
 import { Modal, Button } from 'antd';
 import '../css/rating.css'
 import { Row, Col } from "antd";
+import { feedback } from '../api/data';
 export default function Rating(props) {
 
   
   const [isModalVisible, setIsModalVisible] = useState(false);
  
+
+ 
+ 
   const ratingChanged = (new_Rating) => {
-   
-   
+    var data={
+      'audio_id':props.id,
+      'transcription':props.message,
+      'feedback':new_Rating
+    }
     const bodyFormData = new FormData();
-  bodyFormData.append('audio_id', props.id);
-  bodyFormData.append('transcription', props.message);
-  bodyFormData.append('feedback', new_Rating);
-   
+  bodyFormData.append("data", JSON.stringify(data));
     axios({
       method: "post",
-      url: "http://3.138.164.184:7000/feedback/",
-      data: bodyFormData,
-      headers: { "Content-Type": "multipart/form-data" },
+      url: feedback,
+        data: bodyFormData,
+    
+      
+      headers: { "Content-Type":"multipart/json" },
     },[])
       .then(function (response) {
         //handle success
@@ -49,7 +55,7 @@ export default function Rating(props) {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
- console.log(ratingChanged)
+ 
   return (
    
       <Row>

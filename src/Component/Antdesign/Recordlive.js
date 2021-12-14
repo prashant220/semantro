@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useRef, useEffect } from "react";
 import "./css/uploadfile.css";
 import { Upload, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
@@ -13,6 +13,7 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { Prompt } from "react-router-dom";
 import { clear } from "dom-helpers";
+import {speech} from '../../api/data'
 
 function Recordlive(props) {
   const [speechToTextLoading, setSpeechToTextLoading] = useState(false);
@@ -24,10 +25,57 @@ function Recordlive(props) {
   const [record, setRecord] = useState("Record audio");
   const [play, setPlay] = useState(false);
   const [visible, setVisible] = useState(null);
-  const [second, setSecond] = useState("00");
-  const [minute, setMinute] = useState("00");
-  const [isActive, setIsActive] = useState(false);
-  const [counter, setCounter] = useState(0);
+  const [timer, setTimer] = useState(0)
+  const [isActive, setIsActive] = useState(false)
+  const [isPaused, setIsPaused] = useState(false)
+  const countRef = useRef(null)
+var clock=0;
+  
+  const handleStart = () => {
+    
+  countRef.current = setInterval(() => {
+   
+
+    setTimer((timer) => timer + 1)
+    
+   
+  
+  }, 1000)
+  }
+  useEffect(()=>{
+    if(timer==30){
+   
+    handleReset()
+    stopRecording()
+      setPlay(true)
+      clearInterval(countRef.current)
+    }
+  
+
+  })
+  
+  console.log(timer)
+  console.log(clock)
+    const handleReset = () => {
+    
+      clearInterval(countRef.current)
+   
+      setIsActive(false)
+      setIsPaused(false)
+      setTimer(0)
+    
+
+  }
+
+  const formatTime = () => {
+    const getSeconds = `0${(timer % 60)}`.slice(-2)
+    const minutes = `${Math.floor(timer / 60)}`
+    const getMinutes = `0${minutes % 60}`.slice(-2)
+    const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
+
+    return ` ${getMinutes} : ${getSeconds}`
+  }
+
   const { status, startRecording, stopRecording, blob, mediaBlobUrl } =
     useReactMediaRecorder({
       audio: true,
@@ -49,7 +97,7 @@ console.log(file.size)
  
 
   const handleSpeechToTextRequest = (audioFile) => {
-    let endpoint = "http://3.138.164.184:7000/speech/";
+    let endpoint = speech;
     let file = audioFile;
     setSpeechToTextLoading(true);
     // setVisible(true)
@@ -105,38 +153,7 @@ console.log(file.size)
   }
 
  console.log(status)
- useEffect(() => {
-  let intervalId;
-
-  if (isActive) {
-    intervalId = setInterval(() => {
-      const secondCounter = counter % 60;
-      const minuteCounter = Math.floor(counter / 60);
-
-      let computedSecond =
-        String(secondCounter).length === 1
-          ? `0${secondCounter}`
-          : secondCounter;
-      let computedMinute =
-        String(minuteCounter).length === 1
-          ? `0${minuteCounter}`
-          : minuteCounter;
-
-      setSecond(computedSecond);
-      setMinute(computedMinute);
-
-      setCounter((counter) => counter + 1);
-    }, 1000);
-  }
-
-  return () => clearInterval(intervalId);
-}, [isActive, counter]);
-function stopTimer() {
-  setIsActive(false);
-  setCounter(0);
-  setSecond("00");
-  setMinute("00");
-}
+ 
 
   function changeFormat() {
    
@@ -157,17 +174,13 @@ function stopTimer() {
               <Col>
                 <Button
                   onClick={() => {
-                    setIsActive(true)
+                   handleStart()
                     startRecording();
                     setOpenMic(true);
                     setRecord("Recording...");
                     setspeechToTextSucess(false);
                     setIsChanged(true);
-                    setTimeout(()=>{
-                      stopRecording();
-                      setPlay(true)
-                   
-                    },30000)
+                
                 
                   }}
                   style={{
@@ -245,10 +258,10 @@ function stopTimer() {
                 </div>
               </div>
               <Row>
-                <Col xl={10 }></Col>
-                <Col xl={3}>
-                  <p>Max duration 30 seconds</p>
-                <p id="counter" style={{marginLeft:'15%',fontSize:'30px'}}>{minute}:{second}</p>
+                <Col xl={9 } md={6} xs={6}></Col>
+                <Col xl={5} md={11} xs={10}>
+                  <p>Max duration<b> 30 seconds</b></p>
+                <p id="counter" style={{fontSize:'30px'}}>{formatTime()}</p>
                 </Col>
                 <Col xl={8}></Col>
                
@@ -261,8 +274,9 @@ function stopTimer() {
                   <Button
                     onClick={() => {
                       stopRecording();
-                     stopTimer()
+                        handleReset()
                          setPlay(true);  
+                       
                     
                       setRecord("Record audio");
                     }}
@@ -284,8 +298,8 @@ function stopTimer() {
                   <Button
                     onClick={() => {
                       showConfirm();
-                      stopTimer()
-                     
+                     handleReset()
+                 
                 
                     }}
                     className="reset-button"
@@ -330,7 +344,7 @@ function stopTimer() {
                     <Button
                       onClick={() => {
                         showConfirm();
-                        stopTimer()
+                    handleReset()
                       
                       }}
                       className="reset_button"
@@ -356,7 +370,7 @@ function stopTimer() {
                      onClick={() => {
                       handleRecordedAudioUpload();
                       setIsChanged(false);
-                     stopTimer()
+                 
                    
                 
                     }}
@@ -398,7 +412,7 @@ function stopTimer() {
         <Card>{changeFormat()}</Card>
         <Row>
           <Col span={24} className="speech-file-text-result-container">
-            {visible ? (
+            {visible&&speechText ? (
            
               <Alert message="Conversion Success" type="success" showIcon />
               

@@ -3,7 +3,7 @@ import Navigation from "../Navigation";
 import { Row, Col ,Alert} from "antd";
 import axios from "axios";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
-
+import {contact} from '../../api/data'
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./css/uploadfile.css";
@@ -45,7 +45,7 @@ export default function Contact() {
   const valueChanged = (e) => {
     axios({
       method: "post",
-      url: "http://103.198.9.169/saayak-web-interface/mutation",
+      url: contact,
       data: bodyFormData,
       headers: { "Content-Type": "multipart/form-data" },
     })
