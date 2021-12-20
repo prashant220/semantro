@@ -1,0 +1,68 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+
+.text {
+    font-family: 'Poppins', sans-serif;
+  
+  
+margin-top: 10px;
+;
+text-align: center;
+font-weight: bold;
+font-size: 25px;
+line-height: 37px;
+
+/* identical to box height */
+
+color:white;
+}
+.ant-steps {
+   
+    width: 86%!important;
+  
+    margin-left: 11%!important;
+    margin-bottom: 3%!important;
+   
+}
+.ant-steps-item-title {
+    line-height: 40px;
+}
+.lower-text{
+    font-family: 'Poppins', sans-serif;
+   
+  
+   
+   
+    text-align: center;
+    font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 30px;
+margin-left: 8%;
+
+/* identical to box height */
+
+ color: #e6501e;;
+
+}
+/* @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Poppins:ital,wght@1,300&family=Zen+Antique&display=swap'); */
+.upper-text{
+    text-align: center;
+    font-weight: bold;
+font-size: 25px;
+line-height: 37px;
+
+color: #e6501e;
+}
+.lower-text{
+    text-align: center;
+   
+}
+.anticon svg {
+  
+   
+    color: #E6501F;
+}
+.ant-steps-item-wait > .ant-steps-item-container > .ant-steps-item-content > .ant-steps-item-title {
+    color: rgba(0, 0, 0, 0.85)!important;
+}

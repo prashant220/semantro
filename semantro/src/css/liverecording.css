@@ -1,0 +1,20 @@
+.audio-recorder{
+    position: absolute;
+}
+.live_button{
+margin-top: 40%;
+margin-left: 10%;
+}
+.audio-react-recorder__canvas{
+    position: absolute;
+    height: 25px;
+    margin-left: 10px;
+    width: 100%;
+    margin-top: 37px;
+}
+
+.live-button{
+    
+        margin-top: 81px;
+        margin-left: 5px;
+}

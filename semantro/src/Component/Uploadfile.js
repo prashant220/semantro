@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import "./css/uploadfile.css";
+import "../css/uploadfile.css";
 import { Upload, message } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import { Row, Col, Button, Input, Form, Card, Alert, Rate } from "antd";
 import { r_getSpeechIntoText } from "./api.js";
 import "antd/dist/antd.css";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import Converterbox from "../Converterbox";
-import Rating from "../Rating";
+import Converterbox from "./Converterbox";
+import Rating from "./Rating";
 import { Modal, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Prompt } from "react-router-dom";
-import {speech} from '../../api/data'
+import {speech} from '../api/data'
 
 const { Dragger } = Upload;
 const { TextArea } = Input;

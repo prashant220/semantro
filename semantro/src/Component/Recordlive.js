@@ -1,19 +1,16 @@
 import React, { useState,useRef, useEffect } from "react";
-import "./css/uploadfile.css";
-import { Upload, message } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+import "../css/uploadfile.css";
 import { Row, Col, Button, Input, Form, Card, Alert, Rate } from "antd";
 import { r_getSpeechIntoText } from "./api.js";
 import "antd/dist/antd.css";
 import { useReactMediaRecorder } from "react-media-recorder";
-import Converterbox from "../Converterbox";
-import Rating from "../Rating";
+import Converterbox from "./Converterbox";
+import Rating from "./Rating";
 import { Modal,Result, Space } from "antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import { Prompt } from "react-router-dom";
-import { clear } from "dom-helpers";
-import {speech} from '../../api/data'
+import {speech} from '../api/data'
 
 function Recordlive(props) {
   const [speechToTextLoading, setSpeechToTextLoading] = useState(false);

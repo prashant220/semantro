@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ReactStars from "react-rating-stars-component";
 import "../css/rating.css";
-import { Row, Col, Alert } from "antd";
+import { Row, Col,Alert } from "antd";
 import { feedback } from "../api/data";
 export default function Rating(props) {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -27,10 +27,13 @@ export default function Rating(props) {
     )
       .then(function (response) {
         //handle success
+        console.log(response);
       })
       .catch(function (response) {
         //handle error
+        console.log(response);
       });
+    console.log(new_Rating);
 
     setIsModalVisible(true);
   };
@@ -55,7 +58,8 @@ export default function Rating(props) {
               color: "rgb(207, 72, 27)",
               margin: "auto",
               lineHeight: "28px",
-              marginRight: "6%",
+              marginRight:'6%'
+          
             }}
           >
             Rate this transcribe
@@ -64,7 +68,7 @@ export default function Rating(props) {
           <div>
             <Row>
               <Col xl={10} md={10} xs={7}></Col>
-              <Col md={14} xs={14}>
+              <Col  md={14} xs={14} >
                 <ReactStars
                   count={5}
                   onChange={ratingChanged}
@@ -74,17 +78,21 @@ export default function Rating(props) {
               </Col>
               <Col></Col>
             </Row>
-            {isModalVisible ? (
-              <div style={{ margin: "auto", width: "20%", marginRight: "42%" }}>
-                {" "}
-                <Alert
-                  message="Thank you for rating us!"
-                  type="success"
-                  showIcon
-                />
-              </div>
-            ) : null}
+            {
+              isModalVisible?  
+              <div style={{margin:'auto',width:'20%',marginRight:'42%'}}> <Alert message="Thank you for rating us!" type="success" showIcon /></div>
+              
+               :null
+            }
           </div>
+          {/*   
+  <Modal title="Your rating has been submitted" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+  <div className="success alert">
+   
+  </div>
+       
+      </Modal> */}
+    
         </div>
       </Col>
     </Row>

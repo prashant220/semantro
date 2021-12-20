@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import Navigation from "../Navigation";
-import { Row, Col ,Alert} from "antd";
+import Navigation from "./Navigation";
+import { Row, Col, Alert } from "antd";
 import axios from "axios";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
-import {contact} from '../../api/data'
+import { contact } from "../api/data";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import "./css/uploadfile.css";
-import Footer from "../Footer";
+import "../css/uploadfile.css";
+import Footer from "./Footer";
 export default function Contact() {
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const [subject, setSubject] = useState(null);
   const [query, setQuery] = useState(null);
   const [message, setMessage] = useState(null);
-  const[sent,setSent]=useState(false)
-  const[speechLoading,setSpeechLoading]=useState(false)
+  const [sent, setSent] = useState(false);
+  const [speechLoading, setSpeechLoading] = useState(false);
   const changeValue = (e) => {
     setName(e.target.value);
-    console.log(e.target.value);
   };
 
   {
@@ -51,23 +50,20 @@ export default function Contact() {
     })
       .then(function (response) {
         //handle success
-        console.log(response);
       })
       .catch(function (response) {
         //handle error
-        console.log(response);
       });
 
     e.preventDefault();
-    setEmail("")
-    setMessage("")
-    setQuery("")
-    setSubject("")
-    setName("")
-    setSent(true)
-
+    setEmail("");
+    setMessage("");
+    setQuery("");
+    setSubject("");
+    setName("");
+    setSent(true);
   };
-  
+
   const handleClose = () => {
     setSent(false);
   };
@@ -101,13 +97,13 @@ export default function Contact() {
             padding: "40px",
           }}
         >
-          <Form     onSubmit={valueChanged} >
-            <h2 style={{color:'rgb(230, 80, 30)'}}>Send us a message</h2>
+          <Form onSubmit={valueChanged}>
+            <h2 style={{ color: "rgb(230, 80, 30)" }}>Send us a message</h2>
             <Form.Group as={Row} className="mb-3">
               <Form.Label column sm={2} style={{ color: "#e6501e" }}>
                 Name*
               </Form.Label>
-              <Col  sm={18}>
+              <Col sm={18}>
                 <Form.Control
                   type="text"
                   placeholder="name"
@@ -132,7 +128,6 @@ export default function Contact() {
                   required
                   onChange={(e) => {
                     setEmail(e.target.value);
-                    console.log(e.target.value);
                   }}
                 />
               </Col>
@@ -151,7 +146,6 @@ export default function Contact() {
                   value={subject}
                   onChange={(e) => {
                     setSubject(e.target.value);
-                    console.log(e.target.value);
                   }}
                 />
               </Col>
@@ -170,7 +164,6 @@ export default function Contact() {
                   value={query}
                   onChange={(e) => {
                     setQuery(e.target.value);
-                    console.log(e.target.value);
                   }}
                 />
               </Col>
@@ -189,7 +182,6 @@ export default function Contact() {
                   value={message}
                   onChange={(e) => {
                     setMessage(e.target.value);
-                    console.log(e.target.value);
                   }}
                 />
               </Col>
@@ -204,24 +196,25 @@ export default function Contact() {
                 <Button
                   type="submit"
                   htmlType="submit"
-                  type="primary" 
+                  type="primary"
                   style={{ backgroundColor: "#e6501e", border: "none" }}
                 >
                   Send message
                 </Button>
-             <Row  style={{marginTop:'2vh'}}>
-               <Col xl={6}></Col>
-               <Col xl={24}>
-
-               {sent ? (
-        <Alert message="Your message has been sent" type="success" closable afterClose={handleClose}  id="alert"/>
-      ) : null}
-          
-        
-               </Col>
-                 
+                <Row style={{ marginTop: "2vh" }}>
+                  <Col xl={6}></Col>
+                  <Col xl={24}>
+                    {sent ? (
+                      <Alert
+                        message="Your message has been sent"
+                        type="success"
+                        closable
+                        afterClose={handleClose}
+                        id="alert"
+                      />
+                    ) : null}
+                  </Col>
                 </Row>
-                
               </Col>
             </Form.Group>
           </Form>

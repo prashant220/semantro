@@ -55,9 +55,7 @@
   bottom: 20px;
   top: 65%;
 }
-.ant-alert-success {
-  width: 97% !important;
-}
+
 .ant-tabs {
   display: flex;
   flex-wrap: wrap;
