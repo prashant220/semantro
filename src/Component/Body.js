@@ -4,7 +4,7 @@ import { Steps } from "antd";
 import {
   AudioOutlined,
   CloudUploadOutlined,
-  FileSyncOutlined,
+  FileSyncOutlined, 
   SmileOutlined,
 } from "@ant-design/icons";
 

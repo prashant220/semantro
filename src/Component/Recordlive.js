@@ -116,16 +116,11 @@ function Recordlive() {
   useEffect(() => {
     if (status === "recording") {
       setText(true);
-	  handleStart()
+      handleStart();
     }
-  },[status]);
+  }, [status]);
 
   function changeFormat(status) {
-    // if (status == "recording") {
-	// 	console.log("timer",status)
-	// 	handleStart()
-    // }
-
     if (openMic == false && play == false) {
       return (
         <div class="row">
@@ -140,8 +135,6 @@ function Recordlive() {
             <Col>
               <Button
                 onClick={() => {
-           
- 
                   startRecording();
                   setOpenMic(true);
                   setRecord("Recording...");

@@ -35,8 +35,6 @@ export default class Uploadfile extends Component {
   }
 
   handleSpeechToTextForm = (e) => {
-    console.log(e);
-
     const audioFile = e.audioFile.file.originFileObj;
 
     this.handleSpeechToTextRequest(audioFile);
@@ -46,13 +44,10 @@ export default class Uploadfile extends Component {
     this.setState({ disable: false });
   };
   beforeUpload = (audioFile) => {
-    console.log(audioFile);
-    console.log(audioFile.type);
     if (
       (audioFile.type == "audio/mpeg" && audioFile.size > 7000000) ||
       (audioFile.type == "audio/wav" && audioFile.size > 2000000)
     ) {
-      console.log("greater");
       this.setState({
         large: true,
       });
@@ -60,7 +55,6 @@ export default class Uploadfile extends Component {
       this.setState({
         large: false,
       });
-      console.log("smaller");
     }
   };
 
@@ -73,10 +67,7 @@ export default class Uploadfile extends Component {
       speechToTextSuccess: false,
     });
 
-    console.log(this.state.fileaudio, endpoint);
-
     r_getSpeechIntoText(audioFile, endpoint).then((res) => {
-      console.log(res.data.transcription);
       if (res.data.status === "success") {
         this.setState({
           speechToTextSuccess: true,
@@ -92,7 +83,6 @@ export default class Uploadfile extends Component {
             visible: false,
           });
         }, 3000);
-        console.log(res.data.audio_id);
       } else if (res.data.status === "error") {
         this.setState({
           speechToTextLoading: false,
@@ -110,8 +100,6 @@ export default class Uploadfile extends Component {
       content: "Click to destroy all",
 
       onOk: () => {
-        console.log("OK");
-
         this.setState({
           fileaudio: null,
           id: "",
@@ -120,9 +108,7 @@ export default class Uploadfile extends Component {
         });
         this.formRef.current.resetFields();
       },
-      onCancel() {
-        console.log("Cancel");
-      },
+      onCancel() {},
     });
   };
   active = (e) => {
